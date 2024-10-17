@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Y's Page
+title: Julia Book
 author: Eito YONEYAMA
 copyright: "2024"
 logo: _images/logo.png
@@ -23,9 +23,9 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/rice8y/Eypage  # Online location of your book
+  url: https://github.com/rice8y/Julia_book  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: gh-page  # Which branch of the repository should be used when creating links (optional)
+  branch: gh-pages  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
@@ -36,7 +36,7 @@ html:
   use_issues_button         : false  # Whether to add an "open an issue" button
   home_page_in_navbar       : true  # Whether to include your home page in the left Navigation Bar
   extra_navbar              : Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
-  baseurl                   : https://rice8y.github.io/Eypage/  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  baseurl                   : https://rice8y.github.io/Julia_book/  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
   extra_footer: |
         <div>
         <script src="https://utteranc.es/client.js"
