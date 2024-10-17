@@ -1,0 +1,784 @@
+
+<!DOCTYPE html>
+
+
+<html lang="unknown" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ユーザ定義型 &#8212; Julia Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2eed6f90" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=f3cbe567"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/j_udt';</script>
+    <link rel="canonical" href="https://rice8y.github.io/Julia_book/docs/j_udt.html" />
+    <link rel="icon" href="../_static/icon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="特別な型" href="j_st.html" />
+    <link rel="prev" title="パラメトリック型" href="j_pt.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="unknown"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Julia Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Julia Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Julia 忘備録
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="j_intro.html">Julia の導入</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="j_basic_intro.html">Julia の基本文法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j_basic_lt.html">リテラル</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="j_ts_intro.html">型システム</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="j_nt.html">公称型システムとサブタイピング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j_pt.html">パラメトリック型</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ユーザ定義型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j_st.html">特別な型</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="j_plot_intro.html">グラフ描画</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j_plot.html">Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j_plot_f.html">Plots によるグラフ描画</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j_latex.html">PlotsでLaTeX表記</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="j_op_intro.html">演算</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j_sim.html">数値計算</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="j_ml_intro.html">機械学習</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j_iris.html">Iris Dataset</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sp_intro.html">おまけ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interrupt.html">実行の中断</a></li>
+<li class="toctree-l2"><a class="reference internal" href="update.html">バージョン更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j_module.html">ユーザ定義モジュール</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="gallery_intro.html">Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="xrd.html">XRD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j_sieve.html">エラトステネスの篩</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rice8y/Julia_book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rice8y/Julia_book/edit/gh-pages/docs/docs/j_udt.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/j_udt.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ユーザ定義型</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ユーザによる型定義</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">抽象型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">構造体</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">可変構造体</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">プリミティブ型</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">コンストラクタ定義</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">参考文献</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>ユーザ定義型<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>ユーザによる定義型は以下のようにする.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Decimal</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span>
+<span class="w">        </span><span class="n">value</span><span class="o">::</span><span class="kt">BigInt</span>
+<span class="w">        </span><span class="n">point</span><span class="o">::</span><span class="kt">Int</span>
+<span class="w">       </span><span class="k">end</span>
+</pre></div>
+</div>
+<p>これは, <code class="docutils literal notranslate"><span class="pre">Decimal</span></code> という複合型を定義している. 具体的には, <code class="docutils literal notranslate"><span class="pre">Decimal</span></code> は <code class="docutils literal notranslate"><span class="pre">Real</span></code> の派生型であり, フィールドとして, BigInt 型の <code class="docutils literal notranslate"><span class="pre">value</span></code> と Int 型の <code class="docutils literal notranslate"><span class="pre">point</span></code> を持っている.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isconcretetype</span><span class="p">(</span><span class="n">Decimal</span><span class="p">)</span>
+<span class="nb">true</span>
+</pre></div>
+</div>
+<p>なお, <code class="docutils literal notranslate"><span class="pre">Decimal</span></code>は, 具象型であり, インスタンスを生成できる.</p>
+<p>ユーザが定義できる型には, 抽象型, 構造体, 可変構造体, プリミティブ型が存在する.</p>
+<section id="id2">
+<h2>ユーザによる型定義<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>抽象型<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">MyNumber</span><span class="w"> </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">MyReal</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">MyNumber</span><span class="w"> </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractData</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"> </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">type</span> <span class="kt">AbstractPoint</span><span class="p">{</span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span><span class="p">}</span><span class="w"> </span><span class="k">end</span>
+</pre></div>
+</div>
+<p>抽象型は, <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">type</span> <span class="pre">(型名)</span> <span class="pre">end</span></code> または <code class="docutils literal notranslate"><span class="pre">abstract</span> <span class="pre">type</span> <span class="pre">(型名)</span> <span class="pre">&lt;:</span> <span class="pre">(基本型)</span> <span class="pre">end</span></code> のように定義する. なお, 基本型の指定を省略した場合は, 基本型として <code class="docutils literal notranslate"><span class="pre">Any</span></code> が指定される. また, 3, 4番目はパラメトリック抽象型の定義例であり, <code class="docutils literal notranslate"><span class="pre">{}</span></code> の中に型パラメータを指定する. なお, 4番目は型制約が付いており, <code class="docutils literal notranslate"><span class="pre">where</span></code> ではなく <code class="docutils literal notranslate"><span class="pre">{}</span></code> の中で制約を記述する.</p>
+</section>
+<section id="id4">
+<h3>構造体<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Decimal</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span>
+<span class="w">        </span><span class="n">value</span><span class="o">::</span><span class="kt">BigInt</span>
+<span class="w">        </span><span class="n">point</span><span class="o">::</span><span class="kt">Int</span>
+<span class="w">       </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Point2D</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractPoint</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span>
+<span class="w">        </span><span class="n">x</span><span class="o">::</span><span class="kt">T</span>
+<span class="w">        </span><span class="n">y</span><span class="o">::</span><span class="kt">T</span>
+<span class="w">       </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span> <span class="kt">MySingleton</span><span class="w"> </span><span class="k">end</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">(型名)</span> <span class="pre">end</span></code> または <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">(型名)</span> <span class="pre">&lt;:</span> <span class="pre">(基本型)</span> <span class="pre">end</span></code> のように定義する. 2番目は, <code class="docutils literal notranslate"><span class="pre">AbstractPoint{T}</span></code> を基本型に指定したものである. つまり, パラメトリック抽象型を基本型とした公称的派生型である. また, 2番目では, 型パラメータとして宣言している <code class="docutils literal notranslate"><span class="pre">T</span></code> をフィールドの型アノテーションにも利用している. 3番目のように, フィールドを持たない構造体をシングルトン型という.</p>
+</section>
+<section id="id5">
+<h3>可変構造体<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Future</span>
+<span class="w">        </span><span class="n">value</span>
+<span class="w">        </span><span class="n">done</span><span class="o">::</span><span class="kt">Bool</span>
+<span class="w">       </span><span class="k">end</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mutable</span> <span class="pre">struct</span> <span class="pre">(型名)</span> <span class="pre">end</span></code> または <code class="docutils literal notranslate"><span class="pre">mutable</span> <span class="pre">struct</span> <span class="pre">(型名)</span> <span class="pre">&lt;:</span> <span class="pre">(基本型)</span> <span class="pre">end</span></code> のように定義する. また, 上記の <code class="docutils literal notranslate"><span class="pre">value</span></code> のようにフィールド定義時に型アノテーションを付けなかった場合, <code class="docutils literal notranslate"><span class="pre">::Any</span></code> が指定される.</p>
+<p>ここで, 構造体と可変構造体の違いを比較するために以下の構造体を定義する.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Past</span>
+<span class="w">        </span><span class="n">value</span>
+<span class="w">        </span><span class="n">done</span><span class="o">::</span><span class="kt">Bool</span>
+<span class="w">       </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractPoint</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span>
+<span class="w">        </span><span class="n">x</span><span class="o">::</span><span class="kt">T</span>
+<span class="w">        </span><span class="n">y</span><span class="o">::</span><span class="kt">T</span>
+<span class="w">       </span><span class="k">end</span>
+</pre></div>
+</div>
+<p>構造体と可変構造体の違いを以下に示す.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Future</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+<span class="n">Future</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="o">.</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="mi">20</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="o">.</span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="nb">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span>
+<span class="n">Future</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Past</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+<span class="n">Past</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="o">.</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="n">ERROR</span><span class="o">:</span><span class="w"> </span><span class="n">setfield!</span><span class="o">:</span><span class="w"> </span><span class="n">immutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">of</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">Past</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">changed</span>
+<span class="n">Stacktrace</span><span class="o">:</span>
+<span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="n">setproperty!</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">Past</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="o">::</span><span class="kt">Symbol</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="o">::</span><span class="kt">Int64</span><span class="p">)</span>
+<span class="w">   </span><span class="err">@</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="o">.\</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="o">:</span><span class="mi">38</span>
+<span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">level</span><span class="w"> </span><span class="n">scope</span>
+<span class="w">   </span><span class="err">@</span><span class="w"> </span><span class="n">REPL</span><span class="p">[</span><span class="mi">54</span><span class="p">]</span><span class="o">:</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>上記の例より, 可変構造体のフィールドは変更可能であるが, 構造体のフィールドは変更不可能であることが分かる.</p>
+</section>
+<section id="id6">
+<h3>プリミティブ型<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">primitive</span><span class="w"> </span><span class="k">type</span> <span class="kt">Int24</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Signed</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">primitive</span><span class="w"> </span><span class="k">type</span> <span class="kt">Address</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"> </span><span class="mi">64</span><span class="w"> </span><span class="k">end</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">primitive</span> <span class="pre">type</span> <span class="pre">(型名)</span> <span class="pre">(ビット数)</span> <span class="pre">end</span></code> のように定義する.</p>
+<p>上記の例では, <code class="docutils literal notranslate"><span class="pre">Signed</span></code> を基本型とする <code class="docutils literal notranslate"><span class="pre">Int24</span></code> (24ビット符号付き整数)を定義している. なお, 上記の例はプリミティブ型を定義しただけで, 中身はないためこのままでは使えない. 実際に使えるようにするための方法は, <a class="reference internal" href="j_module.html"><span class="std std-doc">ユーザ定義モジュール</span></a>で示す.</p>
+</section>
+</section>
+<section id="id7">
+<h2>コンストラクタ定義<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Point2D</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">AbstractPoint</span><span class="p">{</span><span class="kt">T</span><span class="p">}</span>
+<span class="w">        </span><span class="n">x</span><span class="o">::</span><span class="kt">T</span>
+<span class="w">        </span><span class="n">y</span><span class="o">::</span><span class="kt">T</span>
+<span class="w">       </span><span class="k">end</span>
+<span class="w">    </span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="kt">Point2D</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pt</span><span class="o">.</span><span class="n">x</span>
+<span class="mi">1</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pt</span><span class="o">.</span><span class="n">y</span>
+<span class="mi">2</span>
+</pre></div>
+</div>
+<p>上記の例では, <code class="docutils literal notranslate"><span class="pre">Point2D</span></code> という型を定義し, そのインスタンスを生成している. ここで, <code class="docutils literal notranslate"><span class="pre">Point2D{Int64}(1,</span> <span class="pre">2)</span></code> 型のインスタンスを生成した <code class="docutils literal notranslate"><span class="pre">Point2D()</span></code> をコンストラクタという. また, 上記の例のようにフィールドの定義数と引数の数が等しく, それぞれ対応するフィールド値として設定されたインスタンスを生成するコンストラクタをデフォルトコンストラクタという.</p>
+<p>以下に, 3種類のコンストラクタを定義する.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">MPoint2D</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="w">    </span><span class="n">MPoint2D</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">MPoint2D</span><span class="p">()</span>
+<span class="w">    </span><span class="n">MPoint2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">T</span><span class="p">}()</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="kt">T</span><span class="w"> </span><span class="o">&lt;:</span><span class="w"> </span><span class="kt">Real</span>
+<span class="w">    </span><span class="n">MPoint2D</span><span class="p">(</span><span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>1番目は引数を1つだけ取るもの, 2番目は引数を取らないもの, 3番目は引数は取らないが型パラメータを指定するものである. なお, これらのコンストラクタは外部コンストラクタという.</p>
+<p>上記のコンストラクタの使用例を以下に示す.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MPoint2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MPoint2D</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MPoint2D</span><span class="p">()</span>
+<span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+<span class="kt">MPoint2D</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>1番目はデフォルトコンストラクタ, 2～3番目は上記のコンストラクタである.</p>
+<p>これらに対し, 内部コンストラクタの例を以下に示す.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="k">mutable</span><span class="w"> </span><span class="k">struct</span> <span class="kt">Future</span>
+<span class="w">    </span><span class="n">value</span>
+<span class="w">    </span><span class="n">done</span><span class="o">::</span><span class="kt">Bool</span>
+
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Future</span><span class="p">()</span>
+<span class="w">        </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="n">obj</span><span class="o">.</span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">        </span><span class="n">obj</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">Future</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="w">        </span><span class="n">new</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w"> </span><span class="k">end</span>
+</pre></div>
+</div>
+<p>1番目は引数を取らないもの, 2番目は引数を1つ取るものである. また, これらのコンストラクタを内部コンストラクタという.</p>
+<p>上記のコンストラクタの使用例を以下に示す.</p>
+<div class="highlight-Julia notranslate"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Future</span><span class="p">()</span>
+<span class="n">Future</span><span class="p">(</span><span class="c">#undef, false)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Future</span><span class="p">(</span><span class="s">&quot;Concrete Value&quot;</span><span class="p">)</span>
+<span class="n">Future</span><span class="p">(</span><span class="s">&quot;Concrete Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+
+
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fDC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Future</span><span class="p">(</span><span class="s">&quot;Concrete Value&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="o">:</span><span class="w"> </span><span class="kt">MethodError</span><span class="o">:</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">matching</span><span class="w"> </span><span class="n">Future</span><span class="p">(</span><span class="o">::</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="o">::</span><span class="kt">Bool</span><span class="p">)</span>
+
+<span class="n">Closest</span><span class="w"> </span><span class="n">candidates</span><span class="w"> </span><span class="n">are</span><span class="o">:</span>
+<span class="w">  </span><span class="n">Future</span><span class="p">(</span><span class="o">::</span><span class="kt">Any</span><span class="p">)</span>
+<span class="w">   </span><span class="err">@</span><span class="w"> </span><span class="n">Main</span><span class="w"> </span><span class="n">REPL</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="mi">10</span>
+
+<span class="n">Stacktrace</span><span class="o">:</span>
+<span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">level</span><span class="w"> </span><span class="n">scope</span>
+<span class="w">   </span><span class="err">@</span><span class="w"> </span><span class="n">REPL</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">:</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>1番目は引数を取らないもの, 2番目は引数を1つ取るもの, 3番目はデフォルトコンストラクタである. ここで, 内部コンストラクタを定義したことによりデフォルトコンストラクタを利用してインスタンスを生成できなくなったことが分かる.これは, デフォルトインストラクタが暗黙的に定義された内部コンストラクタであるからである. ゆえに, 別の内部コンストラクタを明示的に定義するとデフォルトコンストラクタは利用できなくなる.</p>
+<p><strong>内部コンストラクタ</strong>：インスタンスの生成に制限を設ける<br />
+<strong>外部コンストラクタ</strong>：インスタンス生成にバリエーションを持たせる</p>
+<section id="id8">
+<h3>参考文献<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>後藤俊介, &quot;実践Julia入門&quot;, 技術評論社, 2023. ISBN: 978-4-297-13350-4.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="j_pt.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">パラメトリック型</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="j_st.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">特別な型</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ユーザによる型定義</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">抽象型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">構造体</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">可変構造体</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">プリミティブ型</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">コンストラクタ定義</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">参考文献</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eito YONEYAMA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<script src="https://utteranc.es/client.js"
+repo="rice8y/Eypage"
+issue-term="title"
+label="💬"
+theme="github-light"
+crossorigin="anonymous"
+async>
+</script>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
