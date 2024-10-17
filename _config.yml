@@ -18,12 +18,12 @@ latex:
     targetname: book.tex
 
 # Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
+# bibtex_bibfiles:
+#   - references.bib
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/rice8y/Julia_book  # Online location of your book
+  url: https://github.com/rice8y/julia-book  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: gh-pages  # Which branch of the repository should be used when creating links (optional)
 
@@ -36,7 +36,7 @@ html:
   use_issues_button         : false  # Whether to add an "open an issue" button
   home_page_in_navbar       : true  # Whether to include your home page in the left Navigation Bar
   extra_navbar              : Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
-  baseurl                   : https://rice8y.github.io/Julia_book/  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  baseurl                   : https://rice8y.github.io/julia-book/  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
   extra_footer: |
         <div>
         <script src="https://utteranc.es/client.js"
