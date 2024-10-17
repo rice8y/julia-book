@@ -1,0 +1,36 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-article
+root: docs/intro
+sections:
+- file: docs/j_intro
+- file: docs/j_basic_intro
+  sections:
+  - file: docs/j_basic_lt
+- file: docs/j_ts_intro
+  sections:
+  - file: docs/j_nt
+  - file: docs/j_pt
+  - file: docs/j_udt
+  - file: docs/j_st
+- file: docs/j_plot_intro
+  sections:
+  - file: docs/j_plot
+  - file: docs/j_plot_f
+  - file: docs/j_latex
+- file: docs/j_op_intro
+  sections:
+  - file: docs/j_sim
+- file: docs/j_ml_intro
+  sections:
+  - file: docs/j_iris
+- file: docs/sp_intro
+  sections:
+  - file: docs/interrupt
+  - file: docs/update
+  - file: docs/j_module
+- file: docs/gallery_intro
+  sections:
+  - file: docs/xrd
+  - file: docs/j_sieve
