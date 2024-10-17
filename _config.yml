@@ -1,46 +1,40 @@
-# Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
-
 title: Julia Book
 author: Eito YONEYAMA
 copyright: "2024"
 logo: _images/logo.png
 
-# Force re-execution of notebooks on each build.
-# See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
   timeout: -1
 
-# Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
     targetname: book.tex
 
-# Add a bibtex file so that we can create citations
 # bibtex_bibfiles:
 #   - references.bib
 
-# Information about where the book exists on the web
 repository:
-  url: https://github.com/rice8y/julia-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: gh-pages  # Which branch of the repository should be used when creating links (optional)
+  url: https://github.com/rice8y/julia-book
+  path_to_book: docs  
+  branch: gh-pages  
 
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  favicon                   : "_images/icon.png"  # A path to a favicon image
-  use_edit_page_button      : true  # Whether to add an "edit this page" button to pages. If `true`, repository information in repository: must be filled in
-  use_repository_button     : true  # Whether to add a link to your repository button
-  use_issues_button         : false  # Whether to add an "open an issue" button
-  home_page_in_navbar       : true  # Whether to include your home page in the left Navigation Bar
-  extra_navbar              : Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
-  baseurl                   : https://rice8y.github.io/julia-book/  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  # favicon                   : "_images/icon.png"  
+  use_edit_page_button      : true 
+  use_repository_button     : true  
+  use_issues_button         : true  
+  home_page_in_navbar       : true
+  extra_navbar              : |
+        <div>
+        Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+        </div>
+        
+  baseurl                   : https://rice8y.github.io/julia-book/
   extra_footer: |
         <div>
         <script src="https://utteranc.es/client.js"
-        repo="rice8y/Eypage"
+        repo="rice8y/Itp-gc"
         issue-term="title"
         label="💬"
         theme="github-light"
@@ -50,8 +44,7 @@ html:
         </div>
 
 launch_buttons:
-  notebook_interface        : jupyterlab  # The interface interactive links will activate ["classic", "jupyterlab"]
-  #binderhub_url: https://mybinder.org  # The URL for your BinderHub (e.g., https://mybinder.org)
+  notebook_interface: jupyterlab
   colab_url: https://colab.research.google.com
 
 sphinx:
@@ -59,8 +52,32 @@ sphinx:
     language: unknown
     bibtex_reference_style: author_year
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    suppress_warnings:
+      ["mystnb.unknown_mime_type", "myst.domains", "mystnb.mime_priority"]
+    copybutton_prompt_text: "$"
+    intersphinx_mapping:
+      ebp:
+        - "https://executablebooks.org/en/latest/"
+        - null
+      myst-parser:
+        - "https://myst-parser.readthedocs.io/en/latest/"
+        - null
+      myst-nb:
+        - "https://myst-nb.readthedocs.io/en/latest/"
+        - null
+      sphinx:
+        - "https://www.sphinx-doc.org/en/master"
+        - null
+      nbformat:
+        - "https://nbformat.readthedocs.io/en/latest"
+        - null
+      sd:
+        - https://sphinx-design.readthedocs.io/en/latest
+        - null
+
+  extra_extensions:
+    - sphinx_inline_tabs
+    - sphinx_proof
 
 parse:
    myst_url_schemes: [mailto, http, https]
-  #  myst_enable_extensions:
-  #   - amsmath
